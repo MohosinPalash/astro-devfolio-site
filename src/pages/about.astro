@@ -1,0 +1,17 @@
+---
+import { site, myInfo } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Node.js", "Python"];
+---
+
+<BaseLayout title="About">
+  <section class="about">
+    <h1>About Me</h1>
+    <p>{myInfo.bio}</p>
+    <h2>Skills</h2>
+    <ul class="skills">
+      {skills.map((skill) => ( <span class="tag">{skill}</span>))}
+    </ul>
+  </section>
+</BaseLayout>
