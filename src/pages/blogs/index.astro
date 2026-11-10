@@ -1,11 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.dateOfPub.valueOf() - a.data.dateOfPub.valueOf());
 ---
 
 <BaseLayout title="Blogs">
-  <section class="blogs">
     <h1>Blogs</h1>
-    <p class = "muted">Coming Soon!</p>
-  </section>
-
+    <div class="grid"> 
+        {posts.map((post) => (
+            <PostCard 
+                title={post.data.title} 
+                description={post.data.description} 
+                dateOfPub={post.data.dateOfPub} 
+                url={`/blogs/${post.id}`}
+            />
+        ))}
+    </div>
 </BaseLayout>
